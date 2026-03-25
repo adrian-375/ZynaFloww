@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZynaFlow | Web Design Agency</title>
+  <meta name="description" content="ZynaFlow builds premium conversion-focused websites for gyms, clinics, restaurants, salons and growing businesses in the UAE and internationally." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #111111;
+      --text: #f0f2f8;
+      --muted: #888888;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --white: #ffffff;
+      --card-bg: #1a1a1a;
+      --border: rgba(255, 255, 255, 0.08);
+      --dark-text: #15171c;
+      --light-border: rgba(17, 17, 17, 0.14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+
+    section { position: relative; padding: 92px 0; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .section-label::after {
+      content: "";
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Syne", sans-serif;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 18px; }
+    p { line-height: 1.6; }
+    .muted { color: var(--muted); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      padding: 0.88rem 1.35rem;
+      font-weight: 600;
+      transition: 0.3s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: #2f72dd; }
+    .btn-outline { border-color: var(--accent); color: var(--accent); background: transparent; }
+    .btn-outline:hover { color: var(--white); background: var(--accent); }
+
+    /* FIX: Force cards visible */
+    .service-card, .step-card, .get-card, .pain-card, .bento-card {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      background: rgba(17, 17, 17, 0.74);
+      transition: transform 0.4s ease;
+    }
+
+    .navbar.hidden { transform: translateY(-110%); }
+
+    .nav-inner {
+      height: 78px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-wrap img { width: 142px; height: 38px; object-fit: contain; }
+
+    .nav-links {
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .nav-links a {
+      border-radius: 999px;
+      font-size: 0.9rem;
+      padding: 0.52rem 0.9rem;
+      color: #c7c9ce;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--white); background: rgba(255, 255, 255, 0.06); }
+
+    /* Hero */
+    .hero {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      padding-bottom: 80px;
+      overflow: hidden;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .hero-glow { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .hero-glow-left { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(59, 130, 246, 0.18) 0%, transparent 60%); }
+    .hero-glow-right { position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.10) 0%, transparent 50%); }
+
+    .hero-grid { position: relative; z-index: 1; width: 100%; }
+
+    .hero-copy {
+      display: grid;
+      gap: 20px;
+      justify-items: center;
+      text-align: center;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .hero h1 { max-width: 980px; font-size: clamp(2.2rem, 6vw, 4.6rem); line-height: 1.06; }
+
+    .hero h1 .hero-accent {
+      background: linear-gradient(90deg, #3b82f6, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub { max-width: 520px; font-size: 1.05rem; margin: 0 auto; }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 6px;
+    }
+
+    .hero-stat { min-width: 140px; text-align: center; }
+    .hero-stat strong { display: block; font-size: 1.6rem; font-family: "Syne", sans-serif; }
+    .stat-divider { width: 1px; height: 44px; background: rgba(255, 255, 255, 0.1); flex: 0 0 auto; }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    /* Trust Bar */
+    .trust-bar {
+      background: var(--white);
+      color: var(--dark-text);
+      padding: 24px 0;
+      border-top: 1px solid rgba(17, 17, 17, 0.08);
+      border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+    }
+
+    .trust-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 600;
+      text-align: center;
+      padding: 8px;
+    }
+
+    .icon { width: 20px; height: 20px; color: var(--accent); flex: 0 0 auto; }
+
+    /* Bento Stats */
+    .bento-stats { background: #111111; padding: 92px 0; }
+    .bento-title { text-align: center; margin-bottom: 28px; font-size: clamp(2rem, 5vw, 3rem); }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-areas: "delivered delivered day" "rate industries industries";
+      gap: 18px;
+    }
+
+    .bento-card {
+      position: relative;
+      background: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 28px;
+      transition: border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .bento-card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.28), 0 0 24px rgba(59, 130, 246, 0.12);
+    }
+
+    .bento-delivered { grid-area: delivered; }
+    .bento-day { grid-area: day; }
+    .bento-rate { grid-area: rate; }
+    .bento-industries { grid-area: industries; }
+
+    .bento-number { display: block; font-family: "Syne", sans-serif; font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1; margin-bottom: 10px; color: var(--white); }
+    .bento-label { color: #d9deea; font-weight: 700; margin-bottom: 10px; }
+    .bento-text { color: var(--muted); max-width: 540px; }
+
+    .bento-glow {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 92px; height: 92px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.24), transparent 70%);
+      pointer-events: none;
+    }
+
+    .bento-industry-title { color: #3b82f6; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.82rem; font-weight: 700; margin-bottom: 12px; }
+
+    .industry-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .industry-tags span {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.42rem 0.72rem;
+      border-radius: 999px;
+      background: #252525;
+      color: #f3f5fb;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.85rem;
+    }
+
+    /* White sections */
+    .section-light { background: var(--white); color: var(--dark-text); }
+    .section-light .muted { color: #5d6370; }
+    .section-light .section-label { color: #343844; }
+
+    /* Services */
+    .services-grid, .get-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      background: #161618;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card .service-graphic {
+      width: 56px; height: 56px;
+      margin-bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .service-card h3 { font-size: 1.4rem; margin-bottom: 12px; color: #ffffff; transition: 0.32s ease; }
+    .service-card p { color: #8f95a3; transition: 0.32s ease; }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3), 0 0 32px rgba(59, 130, 246, 0.08);
+    }
+
+    .service-card:hover .service-graphic { opacity: 1; }
+
+    /* Outcomes */
+    #outcomes { padding: 92px 0 0; background: var(--bg); }
+
+    .outcomes-intro { width: min(1160px, calc(100% - 48px)); margin: 0 auto 28px; }
+    .outcomes-intro .section-label, .outcomes-intro h2 { color: var(--white); }
+
+    .showcase {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 670px;
+      padding: 0;
+      overflow: hidden;
+      --dot-accent: #ffffff;
+    }
+
+    .showcase-slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(34px);
+      transition: opacity 0.72s ease, transform 0.72s ease, visibility 0.72s ease;
+      pointer-events: none;
+    }
+
+    .showcase-slide.active { opacity: 1; visibility: visible; transform: translateX(0); pointer-events: auto; }
+    .showcase-slide[data-theme="carbo"] { background: linear-gradient(120deg, #1a2a1a 0%, #0a0f0a 68%); }
+    .showcase-slide[data-theme="pavsho"] { background: linear-gradient(120deg, #1e3a2a 0%, #0a1510 66%); }
+    .showcase-slide[data-theme="clearcare"] { background: linear-gradient(120deg, #1a3a6b 0%, #0f1f3d 72%); }
+
+    .showcase-content {
+      width: min(1280px, calc(100% - 90px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .showcase-copy { max-width: 470px; }
+    .showcase-copy h2 { margin-bottom: 12px; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--white); }
+
+    .showcase-label { display: inline-block; margin-bottom: 16px; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.09em; line-height: 1.5; }
+
+    .showcase-copy p { font-size: 1.02rem; color: #d4d7de; max-width: 450px; }
+    .showcase-quote { font-style: italic; color: #aeb4c0; margin: 16px 0 18px; }
+    .showcase-client-meta { font-size: 0.74rem; letter-spacing: 0.14em; color: #c6cad2; text-transform: uppercase; font-weight: 700; }
+
+    .showcase-devices { position: static; min-height: 460px; display: flex; align-items: center; justify-content: center; padding-left: 0; }
+
+    .showcase-device-laptop { margin-left: 0; width: min(800px, 100%); position: relative; }
+
+    .showcase-device-laptop img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 0;
+      border: none;
+      transition: transform 0.4s ease;
+    }
+
+    .showcase-device-laptop img:hover { transform: scale(1.03); }
+
+    .showcase-nav {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      z-index: 5;
+      width: min(1280px, calc(100% - 90px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .showcase-arrows { display: flex; gap: 10px; pointer-events: auto; }
+
+    .showcase-arrow {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: border-color 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+      opacity: 0.78;
+    }
+
+    .showcase-arrow:hover { opacity: 1; border-color: rgba(255, 255, 255, 0.88); background: rgba(255, 255, 255, 0.08); }
+
+    .showcase-dots { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+
+    .showcase-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      background: transparent;
+      cursor: pointer;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .showcase-dot.active { transform: scale(1.16); border-color: var(--dot-accent); background: var(--dot-accent); }
+
+    /* Pain points */
+    .pain-grid { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    .pain-card {
+      border: 1px solid rgba(17, 17, 17, 0.14);
+      border-left: 3px solid var(--accent);
+      padding: 22px 20px;
+      background: #fbfcff;
+    }
+
+    .pain-card h3 { margin-bottom: 10px; font-size: 1.3rem; color: #131824; }
+
+    /* What you get */
+    .get-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(59, 130, 246, 0.32);
+      padding: 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .get-card:hover { transform: translateY(-6px); border-color: rgba(59, 130, 246, 0.7); background: rgba(59, 130, 246, 0.06); }
+    .get-card .icon { margin-bottom: 14px; }
+    .get-card h3 { margin-bottom: 10px; font-size: 1.3rem; }
+
+    /* Process */
+    .process-wrap { margin-top: 30px; display: grid; grid-template-columns: 180px 1fr; gap: 28px; align-items: start; }
+
+    .timeline-col { display: flex; justify-content: center; position: sticky; top: 100px; height: min-content; }
+
+    .timeline-line {
+      position: relative;
+      width: 3px;
+      min-height: 1100px; /* FIX: was 770px */
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.9), rgba(59, 130, 246, 0.3));
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      width: 14px; height: 14px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2), 0 0 12px rgba(59, 130, 246, 0.7);
+      animation: pulse 2.4s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.45), 0 0 12px rgba(59, 130, 246, 0.7); }
+      70% { box-shadow: 0 0 0 12px rgba(59, 130, 246, 0), 0 0 16px rgba(59, 130, 246, 0.45); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0), 0 0 12px rgba(59, 130, 246, 0.7); }
+    }
+
+    .process-steps { display: grid; gap: 16px; }
+
+    .step-card { border: 1px solid rgba(17, 17, 17, 0.13); background: #fcfdff; padding: 20px; }
+    .step-id { color: var(--accent); font-family: "Syne", sans-serif; font-weight: 700; margin-bottom: 8px; display: inline-block; }
+    .step-card h3 { margin-bottom: 8px; font-size: 1.24rem; color: #121826; }
+    .step-card p { color: #5d6370; }
+
+    /* Contact */
+    .contact-copy { max-width: 760px; margin-bottom: 26px; }
+    .contact-form { display: grid; gap: 12px; max-width: 760px; }
+    .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    .field {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #171717;
+      color: var(--text);
+      font: inherit;
+      padding: 0.85rem 0.95rem;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+
+    .field::placeholder { color: #9196a3; }
+    .field:focus { border-color: var(--accent); }
+    textarea.field { resize: vertical; min-height: 140px; }
+
+    .wa-btn {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.82rem 1.2rem;
+      background: #25d366;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .wa-btn:hover { background: #1db954; }
+
+    /* Bottom CTA */
+    .final-cta { position: relative; padding: 96px 0; background: #111111; overflow: hidden; }
+
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.2) 0%, transparent 58%);
+      pointer-events: none;
+    }
+
+    .final-cta-inner { position: relative; z-index: 1; text-align: center; max-width: 900px; margin: 0 auto; display: grid; gap: 18px; justify-items: center; }
+
+    .final-cta-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.34rem 0.78rem;
+      border-radius: 999px;
+      border: 1px solid rgba(59, 130, 246, 0.45);
+      color: #60a5fa;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .final-cta h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); margin-bottom: 2px; }
+
+    .final-cta .line-two {
+      background: linear-gradient(90deg, #3b82f6, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .final-cta p { max-width: 620px; color: var(--muted); }
+    .final-cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 4px; }
+
+    .btn-dark-outline { border-color: rgba(255, 255, 255, 0.72); color: #ffffff; background: rgba(255, 255, 255, 0.02); }
+    .btn-dark-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: #ffffff; }
+
+    /* Footer */
+    .footer { background: #0f0f0f; border-top: 1px solid var(--border); padding: 40px 0 16px; }
+
+    .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: center; margin-bottom: 24px; }
+
+    .footer-logo img { width: 132px; height: 34px; object-fit: contain; }
+
+    .footer-nav { display: flex; gap: 16px; }
+    .footer-nav a { color: #c3c8d3; font-size: 0.92rem; transition: color 0.25s ease; }
+    .footer-nav a:hover { color: var(--white); }
+    .footer-tagline { text-align: right; color: #a4a9b3; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 14px; font-size: 0.88rem; color: #8d929d; text-align: center; }
+
+    @media (max-width: 1080px) {
+      .hero-grid, .showcase-content { grid-template-columns: 1fr; }
+      .bento-grid { grid-template-columns: 1fr 1fr; grid-template-areas: "delivered delivered" "day rate" "industries industries"; }
+      .hero h1, .hero-sub { max-width: 760px; }
+      .hero-stats { justify-content: center; flex-wrap: wrap; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .showcase-copy { max-width: 720px; }
+      .showcase-devices { width: 100%; min-height: 390px; }
+      .timeline-line { min-height: 1100px; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .get-grid, .form-row { grid-template-columns: 1fr; }
+      .trust-row { grid-template-columns: 1fr; }
+      .showcase { min-height: 700px; }
+      .showcase-content, .showcase-nav { width: min(1280px, calc(100% - 32px)); }
+      .showcase-copy { text-align: left; }
+      .bento-grid { grid-template-columns: 1fr; grid-template-areas: "delivered" "day" "rate" "industries"; }
+      .process-wrap { grid-template-columns: 44px 1fr; }
+      .timeline-line { min-height: 1100px; }
+      .footer-top { grid-template-columns: 1fr; text-align: center; }
+      .footer-nav { justify-content: center; flex-wrap: wrap; }
+      .footer-tagline { text-align: center; }
+    }
+
+    @media (max-width: 700px) { .services-grid { grid-template-columns: 1fr; } }
+
+    @media (max-width: 560px) {
+      .container { width: min(1160px, calc(100% - 30px)); }
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-inner .btn-outline { padding-inline: 0.95rem; }
+      .hero-stats { gap: 18px; }
+      .hero-stat { min-width: 130px; }
+      .stat-divider { display: none; }
+      .showcase { min-height: 640px; }
+      .showcase-devices { min-height: 300px; padding-left: 0; }
+      .timeline-line { min-height: 1100px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo-wrap" href="#hero" aria-label="ZynaFlow Home">
+        <img src="logo.png" alt="ZynaFlow logo" />
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#outcomes">Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn-outline" href="#contact">Get In Touch</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-glow" aria-hidden="true">
+        <div class="hero-glow-left"></div>
+        <div class="hero-glow-right"></div>
+      </div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 class="reveal hero-item">
+            We Build Websites That <span class="hero-accent">Turn Visitors</span> Into Paying Customers.
+          </h1>
+          <p class="muted hero-sub reveal hero-item">
+            Premium conversion-focused web design and development for gyms, clinics, restaurants, salons and small businesses in the UAE and internationally.
+          </p>
+          <div class="hero-stats reveal hero-item">
+            <div class="hero-stat">
+              <strong>15+</strong>
+              <span class="muted">Websites Delivered</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="hero-stat">
+              <strong>5 Day</strong>
+              <span class="muted">Delivery</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="hero-stat">
+              <strong>100%</strong>
+              <span class="muted">Satisfaction</span>
+            </div>
+          </div>
+          <div class="hero-ctas reveal hero-item">
+            <a class="btn btn-primary" href="#outcomes">See Our Work</a>
+            <a class="btn btn-outline" href="#contact">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-bar reveal">
+      <div class="container trust-row">
+        <div class="trust-item">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3L4 6V11C4 16 7.4 20.6 12 22C16.6 20.6 20 16 20 11V6L12 3Z" stroke="currentColor" stroke-width="1.8" />
+            <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="1.8" />
+          </svg>
+          <span>Trusted by Real Businesses</span>
+        </div>
+        <div class="trust-item">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" />
+            <path d="M12 7.7V12.2L15.1 14.1" stroke="currentColor" stroke-width="1.8" />
+          </svg>
+          <span>Fast 5 Day Turnaround</span>
+        </div>
+        <div class="trust-item">
+          <div style="display:flex; align-items:center; gap:3px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 3.8L14.2 8.2L19 8.9L15.5 12.4L16.3 17.2L12 15L7.7 17.2L8.5 12.4L5 8.9L9.8 8.2L12 3.8Z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 3.8L14.2 8.2L19 8.9L15.5 12.4L16.3 17.2L12 15L7.7 17.2L8.5 12.4L5 8.9L9.8 8.2L12 3.8Z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 3.8L14.2 8.2L19 8.9L15.5 12.4L16.3 17.2L12 15L7.7 17.2L8.5 12.4L5 8.9L9.8 8.2L12 3.8Z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 3.8L14.2 8.2L19 8.9L15.5 12.4L16.3 17.2L12 15L7.7 17.2L8.5 12.4L5 8.9L9.8 8.2L12 3.8Z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 3.8L14.2 8.2L19 8.9L15.5 12.4L16.3 17.2L12 15L7.7 17.2L8.5 12.4L5 8.9L9.8 8.2L12 3.8Z"/></svg>
+          </div>
+          <span>5 Star Rated Agency</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="bento-stats">
+      <div class="container">
+        <h2 class="bento-title reveal">Built For Results.</h2>
+        <div class="bento-grid">
+          <article class="bento-card bento-delivered reveal">
+            <span class="bento-number">15+</span>
+            <p class="bento-label">Websites Delivered</p>
+            <p class="bento-text">From clinics to carbon tech companies, every site built to convert.</p>
+            <span class="bento-glow" aria-hidden="true"></span>
+          </article>
+          <article class="bento-card bento-day reveal">
+            <span class="bento-number">5</span>
+            <p class="bento-label">Day Delivery</p>
+            <p class="bento-text">From brief to live in 5 working days guaranteed.</p>
+          </article>
+          <article class="bento-card bento-rate reveal">
+            <span class="bento-number">100%</span>
+            <p class="bento-label">Satisfaction Rate</p>
+            <p class="bento-text">Every client has walked away happy. Every single time.</p>
+          </article>
+          <article class="bento-card bento-industries reveal">
+            <p class="bento-industry-title">Industries We Serve</p>
+            <div class="industry-tags">
+              <span>Clinics</span><span>Gyms</span><span>Restaurants</span><span>Salons</span>
+              <span>Carbon Tech</span><span>Enviro Services</span><span>B2B</span><span>Personal Brand</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-light" id="services">
+      <div class="container">
+        <div class="section-label reveal">Our Services</div>
+        <h2 class="reveal">Everything You Need To Dominate Online.</h2>
+        <div class="services-grid">
+          <article class="service-card stagger-service">
+            <svg class="service-graphic" width="48" height="36" viewBox="0 0 48 36" fill="none">
+              <rect x="1" y="1" width="46" height="34" rx="4" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" />
+              <path d="M9 15H39" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M9 23H30" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <h3>Web Design</h3>
+            <p>Stunning conversion focused websites built to impress and perform.</p>
+          </article>
+          <article class="service-card stagger-service">
+            <svg class="service-graphic" width="36" height="48" viewBox="0 0 36 48" fill="none">
+              <rect x="4" y="2" width="28" height="44" rx="4" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" />
+              <path d="M18 34V14" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="2.2" stroke-linecap="round" />
+              <path d="M11 21L18 14L25 21" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <h3>Landing Page</h3>
+            <p>High converting single pages designed to capture leads instantly.</p>
+          </article>
+          <article class="service-card stagger-service">
+            <svg class="service-graphic" width="56" height="40" viewBox="0 0 56 40" fill="none">
+              <text x="2" y="30" fill="#3b82f6" fill-opacity="0.7" font-size="28" font-family="DM Sans, sans-serif">&lt;/&gt;</text>
+            </svg>
+            <h3>Web Development</h3>
+            <p>Custom builds, integrations and full stack solutions.</p>
+          </article>
+          <article class="service-card stagger-service">
+            <svg class="service-graphic" width="48" height="40" viewBox="0 0 48 40" fill="none">
+              <line x1="10" y1="30" x2="24" y2="10" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" />
+              <line x1="24" y1="10" x2="38" y2="30" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" />
+              <line x1="10" y1="30" x2="38" y2="30" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" />
+              <circle cx="10" cy="30" r="4" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" />
+              <circle cx="24" cy="10" r="4" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" />
+              <circle cx="38" cy="30" r="4" stroke="#3b82f6" stroke-opacity="0.7" stroke-width="1.8" />
+            </svg>
+            <h3>Webflow Development</h3>
+            <p>Pixel perfect Webflow sites with CMS and animations.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="outcomes">
+      <div class="outcomes-intro">
+        <div class="section-label reveal">Real Outcomes</div>
+        <h2 class="reveal">Results That Speak For Themselves.</h2>
+      </div>
+      <div class="showcase" id="project-showcase">
+        <article class="showcase-slide active" data-theme="carbo" data-accent="#3ddc84">
+          <div class="showcase-content">
+            <div class="showcase-copy">
+              <h2>CarboNeutrivo Technologies</h2>
+              <span class="showcase-label" style="color:#3ddc84;">Professional audit presence that converts visitors into inquiries.</span>
+              <p class="showcase-quote">"We had an audit coming up and realized we were missing critical documentation. ZynaFlow sorted it in minutes. Honestly a lifesaver."</p>
+              <p class="showcase-client-meta">Mr. Steven, CarboNeutrivo Technologies</p>
+            </div>
+            <div class="showcase-devices">
+              <figure class="showcase-device-laptop">
+                <img src="CarboDisplayImage.png" alt="CarboNeutrivo desktop website mockup" />
+              </figure>
+            </div>
+          </div>
+        </article>
+        <article class="showcase-slide" data-theme="pavsho" data-accent="#f5f0e8">
+          <div class="showcase-content">
+            <div class="showcase-copy">
+              <h2>Pavsho Enviro Services</h2>
+              <span class="showcase-label" style="color:#f5f0e8;">Stronger brand identity and client trust across all touchpoints.</span>
+              <p class="showcase-quote">"Honestly didn't think a website would make that big of a difference but the enquiries started coming in pretty quickly. People take us more seriously now."</p>
+              <p class="showcase-client-meta">Mr. Bipin Charles, Pavsho Enviro Services</p>
+            </div>
+            <div class="showcase-devices">
+              <figure class="showcase-device-laptop">
+                <img src="PavshoEnviroDisplayImage.png" alt="Pavsho desktop website mockup" />
+              </figure>
+            </div>
+          </div>
+        </article>
+        <article class="showcase-slide" data-theme="clearcare" data-accent="#2563eb">
+          <div class="showcase-content">
+            <div class="showcase-copy">
+              <h2>ClearCare Clinic</h2>
+              <span class="showcase-label" style="color:#2563eb;">Significant increase in appointment bookings within weeks.</span>
+              <p class="showcase-quote">"We were getting patients who said they found us online and checked the website before coming in. That never happened before."</p>
+              <p class="showcase-client-meta">Dr. MohanDas, ClearCare Clinic</p>
+            </div>
+            <div class="showcase-devices">
+              <figure class="showcase-device-laptop">
+                <img src="ClearCareDisplayImage.png" alt="ClearCare desktop website mockup" />
+              </figure>
+            </div>
+          </div>
+        </article>
+        <div class="showcase-nav">
+          <div class="showcase-arrows">
+            <button class="showcase-arrow" type="button" id="showcase-prev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.5 6.5L9 12L14.5 17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+            <button class="showcase-arrow" type="button" id="showcase-next">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9.5 6.5L15 12L9.5 17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+          </div>
+          <div class="showcase-dots">
+            <button class="showcase-dot active" type="button" data-slide="0"></button>
+            <button class="showcase-dot" type="button" data-slide="1"></button>
+            <button class="showcase-dot" type="button" data-slide="2"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-light" id="pain-points">
+      <div class="container">
+        <h2 class="reveal">Sound Familiar?</h2>
+        <div class="pain-grid">
+          <article class="pain-card reveal">
+            <h3>Your website looks outdated</h3>
+            <p class="muted">Visitors judge you in 3 seconds. An old site loses clients before you even get a chance.</p>
+          </article>
+          <article class="pain-card reveal">
+            <h3>You are invisible on Google</h3>
+            <p class="muted">If people cannot find you online, they are going to your competitor instead.</p>
+          </article>
+          <article class="pain-card reveal">
+            <h3>Your site gets traffic but no calls</h3>
+            <p class="muted">Looks do not matter if the design does not guide visitors to take action.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="what-you-get">
+      <div class="container">
+        <h2 class="reveal">What You Get With ZynaFlow.</h2>
+        <div class="get-grid">
+          <article class="get-card reveal">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 12L9 17L20 6" stroke="currentColor" stroke-width="1.9" /></svg>
+            <h3>A website that converts</h3>
+            <p class="muted">Every element is designed to turn visitors into leads and leads into clients.</p>
+          </article>
+          <article class="get-card reveal">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 2.8V6.2M12 17.8V21.2M4.8 12H2M22 12H19.2M5.8 5.8L8.2 8.2M15.8 15.8L18.2 18.2M5.8 18.2L8.2 15.8M15.8 8.2L18.2 5.8" stroke="currentColor" stroke-width="1.7" /><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7" /></svg>
+            <h3>Built in 5 days</h3>
+            <p class="muted">Fast delivery without cutting corners. You are live and making money sooner.</p>
+          </article>
+          <article class="get-card reveal">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="7.5" y="2.8" width="9" height="18.4" rx="1.4" stroke="currentColor" stroke-width="1.8" /><path d="M10.5 18H13.5" stroke="currentColor" stroke-width="1.8" /></svg>
+            <h3>Mobile first design</h3>
+            <p class="muted">Over 70% of your customers are on their phones. We design for that.</p>
+          </article>
+          <article class="get-card reveal">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 4.5L14 8.7L18.7 9.4L15.3 12.6L16.1 17.2L12 15.1L7.9 17.2L8.7 12.6L5.3 9.4L10 8.7L12 4.5Z" stroke="currentColor" stroke-width="1.8" /></svg>
+            <h3>Ongoing support</h3>
+            <p class="muted">We do not disappear after launch. We are here when you need us.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-light" id="process">
+      <div class="container">
+        <h2 class="reveal">How We Work.</h2>
+        <div class="process-wrap">
+          <div class="timeline-col" aria-hidden="true">
+            <div class="timeline-line">
+              <span class="timeline-dot" style="top:6%;"></span>
+              <span class="timeline-dot" style="top:24%;"></span>
+              <span class="timeline-dot" style="top:42%;"></span>
+              <span class="timeline-dot" style="top:60%;"></span>
+              <span class="timeline-dot" style="top:78%;"></span>
+              <span class="timeline-dot" style="top:96%;"></span>
+            </div>
+          </div>
+          <div class="process-steps">
+            <article class="step-card">
+              <span class="step-id">01 Discovery</span>
+              <h3>Discovery</h3>
+              <p>We learn your business, your goals and your target customers.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-id">02 Strategy</span>
+              <h3>Strategy</h3>
+              <p>We plan the site structure and conversion flow before touching design.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-id">03 Design</span>
+              <h3>Design</h3>
+              <p>We build a stunning visual design that matches your brand.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-id">04 Development</span>
+              <h3>Development</h3>
+              <p>We code it clean, fast and mobile perfect.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-id">05 Launch</span>
+              <h3>Launch</h3>
+              <p>We deploy your site and make sure everything works perfectly.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-id">06 Support</span>
+              <h3>Support</h3>
+              <p>We stay available for edits, updates and growth.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <h2 class="reveal">Let's Build Something Great.</h2>
+        <p class="muted contact-copy reveal">Tell us about your project and we will get back to you within 24 hours.</p>
+        <form class="contact-form reveal" action="#" method="post">
+          <div class="form-row">
+            <input class="field" type="text" name="full-name" placeholder="Full Name" required />
+            <input class="field" type="text" name="business-name" placeholder="Business Name" required />
+          </div>
+          <div class="form-row">
+            <input class="field" type="email" name="email" placeholder="Email" required />
+            <input class="field" type="tel" name="whatsapp" placeholder="WhatsApp Number" required />
+          </div>
+          <textarea class="field" name="details" placeholder="Project Details" required></textarea>
+          <button class="btn btn-primary" type="submit">Submit Inquiry</button>
+        </form>
+        <a class="wa-btn reveal" href="https://wa.me/918553919887" target="_blank" rel="noopener noreferrer">Message Us On WhatsApp</a>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-cta-inner">
+        <span class="final-cta-badge reveal">Ready to grow?</span>
+        <h2 class="reveal">Let's Build Something<br /><span class="line-two">The World Will Notice.</span></h2>
+        <p class="reveal">Tell us about your project and we will get back to you within 24 hours.</p>
+        <div class="final-cta-buttons reveal">
+          <a class="btn btn-primary" href="#contact">Start Your Project</a>
+          <a class="btn btn-dark-outline" href="https://wa.me/918553919887" target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <a class="footer-logo" href="#hero" aria-label="ZynaFlow Home">
+          <img src="logo.png" alt="ZynaFlow logo" />
+        </a>
+        <nav class="footer-nav">
+          <a href="#services">Services</a>
+          <a href="#outcomes">Work</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <p class="footer-tagline">Premium websites engineered to grow your business.</p>
+      </div>
+      <div class="footer-bottom">© 2026 ZynaFlow. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis({
+      easing: function(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); },
+      lerp: 0.05, /* FIX: was 0.06, now smoother */
+      smoothWheel: true,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.6,
+      syncTouch: false,
+    });
+
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const navbar = document.getElementById("navbar");
+    let lastScroll = 0;
+    lenis.on("scroll", function(e) {
+      const current = e.scroll;
+      if (current > lastScroll && current > 110) { navbar.classList.add("hidden"); }
+      else { navbar.classList.remove("hidden"); }
+      lastScroll = current;
+    });
+
+    gsap.from(".hero-item", { y: 50, autoAlpha: 0, duration: 0.85, stagger: 0.15, ease: "power2.out" });
+
+    gsap.utils.toArray(".reveal").forEach(function(el) {
+      if (el.classList.contains("hero-item")) return;
+      gsap.from(el, {
+        y: 50, autoAlpha: 0, duration: 0.9, ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 90%", once: true }
+      });
+    });
+
+    /* Showcase slider */
+    const showcaseRoot = document.getElementById("project-showcase");
+    const showcaseSlides = Array.from(document.querySelectorAll(".showcase-slide"));
+    const showcaseDots = Array.from(document.querySelectorAll(".showcase-dot"));
+    const showcasePrev = document.getElementById("showcase-prev");
+    const showcaseNext = document.getElementById("showcase-next");
+
+    if (showcaseRoot && showcaseSlides.length) {
+      let showcaseIndex = 0;
+      let showcaseTimer;
+
+      function setShowcaseSlide(index) {
+        showcaseIndex = (index + showcaseSlides.length) % showcaseSlides.length;
+        showcaseSlides.forEach(function(slide, i) { slide.classList.toggle("active", i === showcaseIndex); });
+        showcaseDots.forEach(function(dot, i) { dot.classList.toggle("active", i === showcaseIndex); });
+        showcaseRoot.style.setProperty("--dot-accent", showcaseSlides[showcaseIndex].dataset.accent || "#ffffff");
+      }
+
+      function restartShowcaseTimer() {
+        clearInterval(showcaseTimer);
+        showcaseTimer = setInterval(function() { setShowcaseSlide(showcaseIndex + 1); }, 4000);
+      }
+
+      showcasePrev.addEventListener("click", function() { setShowcaseSlide(showcaseIndex - 1); restartShowcaseTimer(); });
+      showcaseNext.addEventListener("click", function() { setShowcaseSlide(showcaseIndex + 1); restartShowcaseTimer(); });
+      showcaseDots.forEach(function(dot) { dot.addEventListener("click", function() { setShowcaseSlide(Number(dot.dataset.slide)); restartShowcaseTimer(); }); });
+      showcaseRoot.addEventListener("mouseenter", function() { clearInterval(showcaseTimer); });
+      showcaseRoot.addEventListener("mouseleave", function() { restartShowcaseTimer(); });
+
+      setShowcaseSlide(0);
+      restartShowcaseTimer();
+    }
+  </script>
+</body>
+</html>
